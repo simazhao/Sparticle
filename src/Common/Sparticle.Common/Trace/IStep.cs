@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Common
 {
-    interface IStep
+    public interface IStep
     {
         DateTime BeginTime { get; set; }
 
         string Message { get; set; }
     }
 
-    interface ICallStep : IStep
+    public interface ICallStep : IStep
     {
         DateTime EndTime { get; set; }
 

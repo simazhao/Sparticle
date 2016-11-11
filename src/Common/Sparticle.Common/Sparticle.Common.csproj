@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +43,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeRange.cs" />
-    <Compile Include="IExceptionTrace.cs" />
-    <Compile Include="IRequestTrace.cs" />
-    <Compile Include="IResponseTrace.cs" />
-    <Compile Include="IServiceTrace.cs" />
-    <Compile Include="IStep.cs" />
-    <Compile Include="IStepTrace.cs" />
-    <Compile Include="ITimeTrace.cs" />
-    <Compile Include="IRequestWithTokenTrace.cs" />
-    <Compile Include="IFullTrace.cs" />
+    <Compile Include="Random.cs" />
+    <Compile Include="StringBuilderFactory.cs" />
+    <Compile Include="StringExtend.cs" />
+    <Compile Include="Trace\IExceptionTrace.cs" />
+    <Compile Include="Trace\IRequestTrace.cs" />
+    <Compile Include="Trace\IResponseTrace.cs" />
+    <Compile Include="Trace\IServiceTrace.cs" />
+    <Compile Include="Trace\IStep.cs" />
+    <Compile Include="Trace\IStepTrace.cs" />
+    <Compile Include="Trace\ITimeTrace.cs" />
+    <Compile Include="Trace\IRequestWithTokenTrace.cs" />
+    <Compile Include="Trace\IFullTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TraceLevel.cs" />
+    <Compile Include="Trace\TraceLevel.cs" />
+    <Compile Include="SaveLogOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DTO\Sparticle.Request.Context\Sparticle.Request.Context.csproj">

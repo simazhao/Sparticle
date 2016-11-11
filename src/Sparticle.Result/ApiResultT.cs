@@ -10,14 +10,14 @@ namespace Sparticle.Result
     {
         public TData Data { get; set; }
 
-        public new static ApiResult<TData> MakeSucessResult()
+        public static ApiResult<TData> MakeSucessResult()
         {
             return new ApiResult<TData>() { ErrorCode = 0 };
         }
             
         public new static ApiResult<TData> MakeFailedResult(string Message = null)
         {
-            return new ApiResult<TData>() { ErrorCode = -1, FirstError = Message };
+            return new ApiResult<TData>() { ErrorCode = -1, Error = Message };
         }
     }
 }

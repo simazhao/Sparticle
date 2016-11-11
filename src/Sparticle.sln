@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Request.Context",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Response", "DTO\Sparticle.Response\Sparticle.Response.csproj", "{EDF6325E-49DC-4CA8-8CFB-8B7C381187E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Result", "Sparticle.Result\Sparticle.Result.csproj", "{2AC07AA3-7247-4017-A625-524428DC7A6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{EDF6325E-49DC-4CA8-8CFB-8B7C381187E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDF6325E-49DC-4CA8-8CFB-8B7C381187E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDF6325E-49DC-4CA8-8CFB-8B7C381187E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC07AA3-7247-4017-A625-524428DC7A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC07AA3-7247-4017-A625-524428DC7A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC07AA3-7247-4017-A625-524428DC7A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC07AA3-7247-4017-A625-524428DC7A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,5 +62,6 @@ Global
 		{B6DE123B-1D0E-488B-9921-34F935CE3AB5} = {CF5C1526-DA4D-4A18-93DC-48CBFE37E5D3}
 		{7F050A2B-CCBA-4D15-8739-1D1CF3205916} = {CF5C1526-DA4D-4A18-93DC-48CBFE37E5D3}
 		{EDF6325E-49DC-4CA8-8CFB-8B7C381187E6} = {CF5C1526-DA4D-4A18-93DC-48CBFE37E5D3}
+		{2AC07AA3-7247-4017-A625-524428DC7A6C} = {179D4B78-4D0B-4555-84A0-EB58CC8376FA}
 	EndGlobalSection
 EndGlobal
