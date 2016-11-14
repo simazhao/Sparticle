@@ -13,5 +13,9 @@ namespace Sparticle.Common
         DateTime EndTime { get;  }
 
         TimeSpan Elapsed { get; }
+
+        void Start();
+
+        void Stop();
     }
 }

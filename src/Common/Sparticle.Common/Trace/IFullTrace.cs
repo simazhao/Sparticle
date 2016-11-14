@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Common
 {
-    public interface IFullTrace : ITimeTrace, IRequestTrace, IServiceTrace, IResponseTrace
+    public interface IFullTrace : ITimeTrace, IRequestTrace, IServiceTrace, IResponseTrace, IExceptionTrace, IDisposable
     {
 
         

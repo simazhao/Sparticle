@@ -12,8 +12,6 @@ namespace Sparticle.Common
 
         string LocalIp { get; set; }
 
-        TraceLevel Level { get; set; }
-
         IStepTrace StepTrace { get; set; }
     }
 }

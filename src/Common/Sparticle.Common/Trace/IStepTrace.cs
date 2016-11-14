@@ -10,6 +10,8 @@ namespace Sparticle.Common
     {
         IReadOnlyCollection<IStep> Steps { get; }
 
+        bool SerializeResult { get; set; }
+
         void AddStep(IStep step);
 
         void AddStep(string message);

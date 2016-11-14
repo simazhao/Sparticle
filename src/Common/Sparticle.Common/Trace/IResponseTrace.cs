@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sparticle.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Sparticle.Common
     {
         string Token { get; set; }
 
-        string Result { get; set; }
+        ApiResult Result { get; set; }
     }
 }

@@ -32,8 +32,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,7 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeRange.cs" />
+    <Compile Include="IPAddressWrapper.cs" />
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="NetWorkHelper.cs" />
     <Compile Include="Random.cs" />
+    <Compile Include="SingleT.cs" />
     <Compile Include="StringBuilderFactory.cs" />
     <Compile Include="StringExtend.cs" />
     <Compile Include="Trace\IExceptionTrace.cs" />
@@ -56,13 +63,15 @@
     <Compile Include="Trace\IRequestWithTokenTrace.cs" />
     <Compile Include="Trace\IFullTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Trace\TraceLevel.cs" />
-    <Compile Include="SaveLogOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DTO\Sparticle.Request.Context\Sparticle.Request.Context.csproj">
       <Project>{7f050a2b-ccba-4d15-8739-1d1cf3205916}</Project>
       <Name>Sparticle.Request.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparticle.Result\Sparticle.Result.csproj">
+      <Project>{2ac07aa3-7247-4017-a625-524428dc7a6c}</Project>
+      <Name>Sparticle.Result</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
