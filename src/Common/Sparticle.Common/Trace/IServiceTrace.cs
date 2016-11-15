@@ -8,6 +8,8 @@ namespace Sparticle.Common
 {
     public interface IServiceTrace
     {
+        string ApiName { get; set; }
+
         string ServiceType { get; set; }
 
         string LocalIp { get; set; }
