@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Support.NoSql.CouchBase
 {
-    public class Class1
+    public class CasedResult<TData>
     {
+        public TData Result { get; set; }
+
+        public ulong Cas { get; set; }
     }
 }
