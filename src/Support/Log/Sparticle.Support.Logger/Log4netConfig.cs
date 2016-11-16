@@ -56,16 +56,19 @@ namespace Sparticle.Support.Logger
             XmlConfigurator.Configure(repository, xmlConfig);
         }
 
+
         private static readonly Tuple<Level, string>[] levels = {
                             Tuple.Create(Level.Info, Level.Info.Name),
                             Tuple.Create(Level.Warn, Level.Warn.Name),
                             Tuple.Create(Level.Error, Level.Error.Name),
-                            Tuple.Create(Level.Notice, "SLOW"),
+                            Tuple.Create(LogLevelExtend.SLOW, "SLOW"),
         };
 
         private void CreateResposityByCode(string domain)
         {
             var repository = LogManager.CreateRepository(domain);
+
+            repository.LevelMap.Add(LogLevelExtend.SLOW);
 
             foreach (var level in levels)
             {
@@ -79,9 +82,10 @@ namespace Sparticle.Support.Logger
 
         private FilterSkeleton CreateLevelFilter(Level level)
         {
-            var levelFilter = new LevelMatchFilter();
+            var levelFilter = new LevelRangeFilter();
 
-            levelFilter.LevelToMatch = level;
+            levelFilter.LevelMin = level;
+            levelFilter.LevelMax = level;
             levelFilter.ActivateOptions();
 
             return levelFilter;

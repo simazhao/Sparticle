@@ -36,7 +36,7 @@ namespace Sparticle.Support.Logger
         {
             var slowEventData = new LoggingEventData()
             {
-                Level = Level.Notice,
+                Level = LogLevelExtend.SLOW,
                 Message = msg.ToString(),
             };
 
