@@ -18,6 +18,5 @@ namespace Sparticle.Common
         string Method { get; set; }
 
         string Parameters { get; set; }
-
     }
 }

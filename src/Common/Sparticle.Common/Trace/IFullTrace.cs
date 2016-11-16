@@ -8,8 +8,6 @@ namespace Sparticle.Common
 {
     public interface IFullTrace : ITimeTrace, IRequestTrace, IServiceTrace, IResponseTrace, IExceptionTrace, IDisposable
     {
-
-        
-        
+        string Id { get; set; }
     }
 }

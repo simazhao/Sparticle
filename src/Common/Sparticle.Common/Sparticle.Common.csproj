@@ -53,6 +53,10 @@
     <Compile Include="SingleT.cs" />
     <Compile Include="StringBuilderFactory.cs" />
     <Compile Include="StringExtend.cs" />
+    <Compile Include="Trace\CallStep.cs" />
+    <Compile Include="Trace\StepBase.cs" />
+    <Compile Include="Trace\StepTrace.cs" />
+    <Compile Include="Trace\Trace.cs" />
     <Compile Include="Trace\IExceptionTrace.cs" />
     <Compile Include="Trace\IRequestTrace.cs" />
     <Compile Include="Trace\IResponseTrace.cs" />

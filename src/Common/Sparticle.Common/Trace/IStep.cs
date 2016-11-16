@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sparticle.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,8 @@ namespace Sparticle.Common
 
         TimeSpan Elapsed { get;}
 
-        void Start();
+        void Start(string method);
 
-        void Stop();
+        void Stop<TData>(ApiResult<TData> result, bool serializeResult = false);
     }
 }
