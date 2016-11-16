@@ -74,6 +74,31 @@ namespace Sparticle.Common
             return sb.ToString();
         }
 
+        public static string GetArgsInfo<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10)
+        {
+            return string.Format("[t1:{0},t2:{1},t3:{2},t4:{3},t5:{4},t6:{5},t7:{6},t8:{7},t9:{8},t10:{9}]",
+                GetArgInfo(t1), GetArgInfo(t2), GetArgInfo(t3), GetArgInfo(t4), GetArgInfo(t5), GetArgInfo(t6), GetArgInfo(t7),
+                GetArgInfo(t8), GetArgInfo(t9), GetArgInfo(t10));
+        }
+
+        private static string GetArgInfo<TParam>(TParam param)
+        {
+            var type = typeof(TParam);
+
+
+            if (type.IsClass)
+            {
+                if (param == null)
+                    return null;
+
+                return JsonHelper.ToJson(param);
+            }
+            else
+            {
+                return param.ToString();
+            }
+        }
+
         private static string GetExceptionTypeStack(Exception e)
         {
             if (e.InnerException != null)
