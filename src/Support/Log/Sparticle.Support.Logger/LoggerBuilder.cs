@@ -15,9 +15,9 @@ namespace Sparticle.Support.Logger
 
         public LoggerBuilder()
         {
-            _kernel.Bind<ILoggerPolicyFactory>().To<Log4netPolicyFactory>().InSingletonScope().Named("Log4Net");
+            _kernel.Bind<ILoggerPolicyFactory>().To<Log4netPolicyFactory>().InSingletonScope().Named("Log4net");
 
-            _kernel.Bind<ILoggerPolicyFactory>().To<MongoDbPolicyFactory>().InSingletonScope().Named("Log4Net");
+            _kernel.Bind<ILoggerPolicyFactory>().To<MongoDbPolicyFactory>().InSingletonScope().Named("Mongo");
         }
 
         public ILoggerPolicyFactory this[string key]

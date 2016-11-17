@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sparticle.Config.Types;
+using System.ComponentModel.Composition;
 
 namespace Sparticle.Service.Handler.Recommand
 {
+    [Export(typeof(IRequestHandler))]
     public class LogHandler : RequestHandlerBase
     {
         private readonly IDictionary<SaveLogOptionPosition, TraceSaver> _traceSavers = new Dictionary<SaveLogOptionPosition, TraceSaver>();
@@ -56,10 +58,10 @@ namespace Sparticle.Service.Handler.Recommand
             return success ? TraceLevel.Info : TraceLevel.Warn;
         }
 
-        private static readonly char SaveOptionDelimeter = '|';
+        private static readonly char[] SaveOptionDelimeter = { '|' };
         private void SaveTrace(IFullTrace trace, TraceLevel traceLevel, string saveOption, string domain)
         {
-            var options = saveOption.Split(SaveOptionDelimeter);
+            var options = saveOption.Split(SaveOptionDelimeter, StringSplitOptions.RemoveEmptyEntries);
 
             for (int i = 0; i < options.Length; ++i)
             {

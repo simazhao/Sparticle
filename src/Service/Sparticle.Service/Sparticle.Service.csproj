@@ -66,6 +66,10 @@
       <Project>{7f050a2b-ccba-4d15-8739-1d1cf3205916}</Project>
       <Name>Sparticle.Request.Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
+      <Project>{21A5489B-2A56-4357-B570-E87E1DB9F3E6}</Project>
+      <Name>Sparticle.SAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sparticle.Service.Handler\Sparticle.Service.Handler.csproj">
       <Project>{F14B2B32-FA21-4F6D-B7E7-986750BACFD4}</Project>
       <Name>Sparticle.Service.Handler</Name>

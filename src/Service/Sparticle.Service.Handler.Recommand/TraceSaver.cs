@@ -11,7 +11,19 @@ namespace Sparticle.Service.Handler.Recommand
 {
     public abstract class TraceSaver
     {
-        public static readonly TimeSpan ResponseTimeThreshold = TimeSpan.Parse(ConfigurationManager.AppSettings["ResponseTimeThreshold"]);
+        public TimeSpan ResponseTimeThreshold
+        {
+            get
+            {
+                TimeSpan threshold;
+                if (!TimeSpan.TryParse(ConfigurationManager.AppSettings ["ResponseTimeThreshold"], out threshold))
+                {
+                    threshold = new TimeSpan(0, 0, 0, 0, 500);
+                }
+
+                return threshold;
+            }
+        }
 
         public void Save(IFullTrace trace, TraceLevel traceLevel, int allowLevel, string domain)
         {

@@ -10,7 +10,7 @@ namespace Sparticle.Service
 {
     class ServiceSession
     {
-        private ServiceSession()
+        public ServiceSession()
         {
 
         }

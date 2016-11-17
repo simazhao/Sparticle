@@ -43,7 +43,7 @@ namespace Sparticle.Support.Logger
     {
         public Log4netPolicyFactory()
         {
-            BasicConfigurator.Configure();
+            Log4netConfig.CreateRespositiesByCode();
         }
 
         protected override ILoggerPolicy CreateLogger(string category, string type, string tag)

@@ -1,7 +1,9 @@
 ﻿using Sparticle.Common;
+using Sparticle.Common.Trace;
 using Sparticle.Config.Types;
 using Sparticle.Request.Context;
 using Sparticle.Result;
+using Sparticle.SAL;
 using Sparticle.Service.Handler;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,7 @@ namespace Sparticle.Service
         public ApiResult HandleRequest<TRequest, TResponse>(string apiActionName, TRequest request, RequestContext reqContext,
             Func<TRequest, IFullTrace, ApiResult<TResponse>> handler, AccessLevel defaultAccessLevel=AccessLevel.NoLimit)
         {
+            ServiceSession.Current = new ServiceSession();
             ServiceSession.Current.RequestContext = reqContext;
 
             using (var trace = CreateTrace())
@@ -89,7 +92,7 @@ namespace Sparticle.Service
 
         private IFullTrace CreateTrace()
         {
-            throw new NotImplementedException();
+            return new Trace();
         }
 
         private void MakeupInpectContext(InspectContext context, string actionName)
@@ -105,7 +108,7 @@ namespace Sparticle.Service
                 }
 
                 // todo: add core & cache handle inject later
-                // CoreAccessBase.Trace = context.Trace;
+                ServiceAccessBase.Trace = context.Trace;
                 // CachedDataHelper.Trace = context.Trace;
             }
         }

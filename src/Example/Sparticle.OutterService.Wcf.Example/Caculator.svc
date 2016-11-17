@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Sparticle.OutterService.Wcf.Example.Caculator" CodeBehind="Caculator.svc.cs" %>

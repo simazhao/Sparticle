@@ -12,5 +12,7 @@ namespace Sparticle.Common
         string Token { get; set; }
 
         ApiResult Result { get; set; }
+
+        string InnerError { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Sparticle.Support.Logger
         public static readonly string Domains = ConfigurationManager.AppSettings["Log4netDomains"];
         public static readonly string RootLogDir = ConfigurationManager.AppSettings["Log4netRootDir"];
 
-        public void CreateRespositiesByCode()
+        public static void CreateRespositiesByCode()
         {
             foreach (var domain in Domains.Split(','))
             {
@@ -30,7 +30,7 @@ namespace Sparticle.Support.Logger
             }
         }
 
-        public void CreateRespositiesByXml()
+        public static void CreateRespositiesByXml()
         {
             var basepath = AppDomain.CurrentDomain.BaseDirectory;
             var xmlConfigPath = System.IO.Path.Combine(basepath, "log4net.xml");
@@ -44,7 +44,7 @@ namespace Sparticle.Support.Logger
             }
         }
 
-        private void CreateResposityByXml(string domain, string xmlConfigPath)
+        private static void CreateResposityByXml(string domain, string xmlConfigPath)
         {
             var xmlConfig = new FileInfo(xmlConfigPath);
 
@@ -64,7 +64,7 @@ namespace Sparticle.Support.Logger
                             Tuple.Create(LogLevelExtend.SLOW, "SLOW"),
         };
 
-        private void CreateResposityByCode(string domain)
+        private static void CreateResposityByCode(string domain)
         {
             var repository = LogManager.CreateRepository(domain);
 
@@ -80,7 +80,7 @@ namespace Sparticle.Support.Logger
             }
         }
 
-        private FilterSkeleton CreateLevelFilter(Level level)
+        private static FilterSkeleton CreateLevelFilter(Level level)
         {
             var levelFilter = new LevelRangeFilter();
 
@@ -94,7 +94,7 @@ namespace Sparticle.Support.Logger
         private static readonly string layoutFormat = "@Log Begin%newlineThread ID：[%thread]%newline%message%newlineLog End@%newline";
         private static ILayout DefaultLayout = new PatternLayout(layoutFormat);
 
-        private FileAppender CreateFileAppender(string domain, string rootLogDir, string level, FilterSkeleton filter)
+        private static FileAppender CreateFileAppender(string domain, string rootLogDir, string level, FilterSkeleton filter)
         {
             var fileAppender = new RollingFileAppender();
             fileAppender.Name = domain + "_" + level + "_FileAppender";

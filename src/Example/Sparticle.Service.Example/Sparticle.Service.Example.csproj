@@ -60,9 +60,21 @@
       <Project>{7F050A2B-CCBA-4D15-8739-1D1CF3205916}</Project>
       <Name>Sparticle.Request.Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
+      <Project>{21A5489B-2A56-4357-B570-E87E1DB9F3E6}</Project>
+      <Name>Sparticle.SAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Service\Sparticle.Service\Sparticle.Service.csproj">
       <Project>{80893830-605a-4ea0-bd29-07d403f7d62b}</Project>
       <Name>Sparticle.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparticle.DTO.Example\Sparticle.DTO.Example.csproj">
+      <Project>{A52D6130-B814-419A-9DD2-524B97512DE6}</Project>
+      <Name>Sparticle.DTO.Example</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sparticle.SAL.Example\Sparticle.SAL.Example.csproj">
+      <Project>{A4931E8D-B8EF-496F-BFFE-7D5BDD8CCC21}</Project>
+      <Name>Sparticle.SAL.Example</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sparticle.Service.Interface.Example\Sparticle.Service.Interface.Example.csproj">
       <Project>{a126d774-c758-413f-9c7a-62f3d0b18984}</Project>

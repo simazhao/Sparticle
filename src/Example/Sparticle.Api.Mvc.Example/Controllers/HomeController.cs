@@ -1,4 +1,5 @@
-﻿using Sparticle.Request.Context;
+﻿using Sparticle.DTO.Example;
+using Sparticle.Request.Context;
 using Sparticle.Service.Example;
 using Sparticle.Service.Interface.Example;
 using System;
@@ -24,15 +25,29 @@ namespace Sparticle.Api.Mvc.Example.Controllers
         }
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string name)
         {
-            return View();
+            return Content("Welcome! " + name);
         }
 
         private IExampleService _exampleService = new ExampleService("Example", "Mvc");
         public ActionResult Echo(string msg, RequestContext requestContext)
         {
            var result =  _exampleService.Echo(msg, requestContext);
+
+            return Json(result);
+        }
+
+        public ActionResult Add(AddRequest request, RequestContext requestContext)
+        {
+            var result = _exampleService.Add(request, requestContext);
+
+            return Json(result);
+        }
+
+        public ActionResult Div(DivRequest request, RequestContext requestContext)
+        {
+            var result = _exampleService.Div(request, requestContext);
 
             return Json(result);
         }

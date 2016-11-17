@@ -22,6 +22,7 @@ namespace Sparticle.SAL
             result.Error = ServiceHasError;
 
             callStep.Exception = ex.Message;
+            Trace.InnerError = ex.Message;
         }
     }
 }

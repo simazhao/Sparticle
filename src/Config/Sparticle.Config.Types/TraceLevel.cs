@@ -26,7 +26,7 @@ namespace Sparticle.Config.Types
         /// </summary>
         Error = 4,
 
-        All = Info & Warn & Error,
-        Care = Warn & Error,
+        All = Info | Warn | Error,
+        Care = Warn | Error,
     }
 }

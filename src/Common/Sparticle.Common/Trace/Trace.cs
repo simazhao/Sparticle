@@ -14,7 +14,7 @@ namespace Sparticle.Common.Trace
         #region field
         private DateTime beginTime;
         private DateTime endTime;
-        private Stopwatch stopWatch;
+        private Stopwatch stopWatch = new Stopwatch();
         private string exception;
         private string _id;
         #endregion
@@ -72,6 +72,8 @@ namespace Sparticle.Common.Trace
 
         public ApiResult Result { get; set; }
 
+        public string InnerError { get; set; }
+
         public string Exception { get { return exception; } }
 
         void IExceptionTrace.SetException(Exception exp)
@@ -88,24 +90,47 @@ namespace Sparticle.Common.Trace
                 endTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             sb.AppendFormat("Elapsed: {0}\r\n", stopWatch.Elapsed.ToString());
 
-            sb.AppendFormat("Source:{0}, {1}\r\n", JsonHelper.ToJson(this.RequestContext.Device));     
-            sb.AppendFormat("Channel: {0}\r\n", JsonHelper.ToJson(this.RequestContext.Channel));
+            var device = string.Empty;
+            if (RequestContext != null && this.RequestContext.Device != null)
+            {
+                device = JsonHelper.ToJson(this.RequestContext.Device);
+            }
+            sb.AppendFormat("Source:{0}\r\n", device);
+
+            var channel = string.Empty;
+            if (RequestContext != null && this.RequestContext.Channel != null)
+            {
+                channel = JsonHelper.ToJson(this.RequestContext.Channel);
+            }
+            sb.AppendFormat("Channel: {0}\r\n", channel);
 
             sb.AppendFormat("User: {0}\r\n", User);
             sb.AppendFormat("Token: {0}\r\n", Token);
             sb.AppendFormat("Method: {0} on {1}\r\n", Method, User);
             sb.AppendFormat("Parameters: {0}\r\n", Parameters);
 
-            foreach (var traceStepInfo in this.steptrace.Steps)
-            {
-                sb.AppendFormat("Step: {0}\r\n", traceStepInfo.ToString());
-            }
-
-            sb.AppendFormat("Result: {0}", Result != null ? JsonHelper.ToJson(Result) : null);
+            sb.AppendFormat("Result: {0}\r\n", Result != null ? JsonHelper.ToJson(Result) : null);
 
             if (!string.IsNullOrEmpty(Exception))
             {
-                sb.AppendFormat("\r\nException: {0}", Exception);
+                sb.AppendFormat("Exception: {0}\r\n", Exception);
+            }
+
+            if (!string.IsNullOrEmpty(InnerError))
+            {
+                sb.AppendFormat("InnerError: {0}\r\n", InnerError);
+            }
+
+            var steps = this.steptrace.Steps;
+
+            if (steps.Count > 0)
+            {
+                sb.AppendFormat("Step: {0}", steps.First().ToString());
+
+                foreach (var traceStepInfo in steps.Skip(1))
+                {
+                    sb.AppendFormat("\r\nStep: {0}", traceStepInfo.ToString());
+                }
             }
 
             return StringBuilderFactory.Instance.GetStringAndReleaseBuilder(sb);
@@ -144,7 +169,7 @@ namespace Sparticle.Common.Trace
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
             // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
+            GC.SuppressFinalize(this);
         }
         #endregion
     }

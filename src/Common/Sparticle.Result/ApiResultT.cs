@@ -14,7 +14,13 @@ namespace Sparticle.Result
         {
             return new ApiResult<TData>() { ErrorCode = 0 };
         }
-            
+
+        public static ApiResult<TData> MakeSucessResult(TData data)
+        {
+            return new ApiResult<TData>() { ErrorCode = 0, Data = data };
+        }
+
+
         public new static ApiResult<TData> MakeFailedResult(string Message = null)
         {
             return new ApiResult<TData>() { ErrorCode = -1, Error = Message };

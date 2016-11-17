@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,13 @@ namespace Sparticle.Common
 {
     public static class JsonHelper
     {
-        public static string ToJson(object t)
+        public static string ToJson(object obj)
         {
             try
             {
-                var ser = new JavaScriptSerializer();
-                ser.MaxJsonLength = Int32.MaxValue;
-                return ser.Serialize(t);
+                return JsonConvert.SerializeObject(obj);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -29,11 +28,9 @@ namespace Sparticle.Common
         {
             try
             {
-                var ser = new JavaScriptSerializer();
-                ser.MaxJsonLength = Int32.MaxValue;
-                return ser.Deserialize<TData>(json);
+                return JsonConvert.DeserializeObject<TData>(json);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
