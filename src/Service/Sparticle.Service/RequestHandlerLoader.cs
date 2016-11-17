@@ -1,4 +1,5 @@
 ﻿using FundTrade.API.Service.Common;
+using Sparticle.Config.LocalSetting;
 using Sparticle.Service.Handler;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace Sparticle.Service
 {
     class RequestHandlerLoader
     {
-        public static readonly string PluginDirName = "Handlers";
-
         public RequestHandlerLoader()
         {
 
         }
+
+        private readonly static object Lock = new object();
 
         private static RequestHandlerLoader _instance;
         public static RequestHandlerLoader Instance
@@ -28,7 +29,7 @@ namespace Sparticle.Service
             {
                 if (_instance == null)
                 {
-                    lock(PluginDirName)
+                    lock(Lock)
                     {
                         if (_instance == null)
                         {
@@ -58,7 +59,7 @@ namespace Sparticle.Service
 
         private void LoadRequestHandlers()
         {
-            string configDllPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PluginDirName);
+            string configDllPath = LocalConfig.HandlerPluginDir;
 
             var catalog = new AggregateCatalog();
             catalog.Catalogs.Add(new DirectoryCatalog(configDllPath));
