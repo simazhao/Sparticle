@@ -90,12 +90,21 @@ namespace Sparticle.Common.Trace
                 endTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             sb.AppendFormat("Elapsed: {0}\r\n", stopWatch.Elapsed.ToString());
 
+            sb.AppendFormat("LocalIP:{0}\r\n", this.LocalIp);
+
+            var clientIp = string.Empty;
+            if (RequestContext != null && this.RequestContext.Device != null)
+            {
+                clientIp = this.RequestContext.Device.Ip;
+            }
+            sb.AppendFormat("ClientIp:{0}\r\n", clientIp);
+
             var device = string.Empty;
             if (RequestContext != null && this.RequestContext.Device != null)
             {
                 device = JsonHelper.ToJson(this.RequestContext.Device);
             }
-            sb.AppendFormat("Source:{0}\r\n", device);
+            sb.AppendFormat("Device:{0}\r\n", device);
 
             var channel = string.Empty;
             if (RequestContext != null && this.RequestContext.Channel != null)

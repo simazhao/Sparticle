@@ -20,15 +20,7 @@ namespace Sparticle.Service
 
         public RequestContext RequestContext
         {
-            get
-            {
-                return HttpContext.Current.Items[HttpContextSessionKeys.RequestContext] as RequestContext;
-            }
-
-            set
-            {
-                HttpContext.Current.Items[HttpContextSessionKeys.RequestContext] = value;
-            }
+            get;set;
         }
 
         public string ActionName

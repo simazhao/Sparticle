@@ -81,6 +81,11 @@ namespace Sparticle.Common
                 GetArgInfo(t8), GetArgInfo(t9), GetArgInfo(t10));
         }
 
+        public static bool IsNullOrEmtpyString(object obj)
+        {
+            return obj == null || string.IsNullOrEmpty(obj as string);
+        }
+
         private static string GetArgInfo<TParam>(TParam param)
         {
             var type = typeof(TParam);
@@ -139,7 +144,7 @@ namespace Sparticle.Common
             return e.StackTrace;
         }
 
-        static string GetMd5Hash(MD5 md5Hash, string input)
+        private static string GetMd5Hash(MD5 md5Hash, string input)
         {
             // Convert the input string to a byte array and compute the hash.
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));

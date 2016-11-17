@@ -20,11 +20,11 @@ namespace Sparticle.Service.Example
             _helper = new CachedDataHelper(CacheKeyPrefix.KeyPrefixs);
         }
 
-        public static CachedResult<int> MakeRandom(int seconds)
+        public static CachedResult<int> MakeRandom(string name, int seconds)
         {
-            return _helper.GetCachedValue(CacheKeyPrefix.Store, String.Empty, () =>
+            return _helper.GetCachedValue(CacheKeyPrefix.Store, name, () =>
             {
-                return ApiResult<int>.MakeSuccessResult(random.Next());
+                return ApiResult<int>.MakeSuccessResult(random.Next(1, Int32.MaxValue));
 
             }, TimeSpan.FromSeconds(seconds), "Local");
         }

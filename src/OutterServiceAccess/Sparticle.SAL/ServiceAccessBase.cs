@@ -1,5 +1,6 @@
 ﻿using Sparticle.Common;
 using Sparticle.Common.Trace;
+using Sparticle.Config.MessageCollection;
 using Sparticle.Result;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,13 @@ namespace Sparticle.SAL
 {
     public abstract partial class ServiceAccessBase
     {
-        public static readonly string ServiceHasError = "服务器开小差了";
-
         [ThreadStatic]
         public static IFullTrace Trace;
 
         private void ExceptionFail<TResult>(ApiResult<TResult> result, Exception ex, CallStep callStep)
         {
             result.ErrorCode = -1;
-            result.Error = ServiceHasError;
+            result.Error = ErrorMessageCollection.SystemException;
 
             callStep.Exception = ex.Message;
             Trace.InnerError = ex.Message;

@@ -38,9 +38,11 @@ namespace Sparticle.Service
             ServiceSession.Current = new ServiceSession();
             ServiceSession.Current.RequestContext = reqContext;
 
-            using (var trace = CreateTrace())
+            using (var trace = CreateTrace(reqContext))
             {
                 trace.Method = apiActionName;
+                trace.ApiName = this.ApiName;
+                trace.ServiceType = this.Domain;
 
                 var inspectContext = new InspectContext<TRequest>
                 {
@@ -90,9 +92,9 @@ namespace Sparticle.Service
             });
         }
 
-        private IFullTrace CreateTrace()
+        private IFullTrace CreateTrace(RequestContext reqContext)
         {
-            return new Trace();
+            return new Trace() { RequestContext = reqContext };
         }
 
         private void MakeupInpectContext(InspectContext context, string actionName)

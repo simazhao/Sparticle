@@ -77,7 +77,7 @@ namespace Sparticle.Service.Example
 
         public ApiResult<int> StoreImpl(MakeRandomIntRequest request, IFullTrace trace)
         {
-            return CachedData.MakeRandom(request.Seconds);
+            return ApiResult<int>.MakeSuccessResult().Copy(CachedData.MakeRandom(request.WhoAreYou, request.Seconds));
         }
     }
 }

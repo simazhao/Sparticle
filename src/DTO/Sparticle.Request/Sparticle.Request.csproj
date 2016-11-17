@@ -45,6 +45,7 @@
     <Compile Include="InSessionRequest.cs" />
     <Compile Include="IRequestDto.cs" />
     <Compile Include="ISelfCheck.cs" />
+    <Compile Include="IUserRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenRefreshRequest.cs" />
     <Compile Include="WithTokenRequest.cs" />

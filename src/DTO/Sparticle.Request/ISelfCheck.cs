@@ -8,6 +8,6 @@ namespace Sparticle.Request
 {
     public interface ISelfCheck
     {
-        bool Check(ref string error);
+        bool Check(out string error);
     }
 }

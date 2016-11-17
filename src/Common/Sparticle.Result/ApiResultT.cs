@@ -25,5 +25,14 @@ namespace Sparticle.Result
         {
             return new ApiResult<TData>() { ErrorCode = -1, Error = Message };
         }
+
+        public ApiResult<TData> Copy(ApiResult<TData> other)
+        {
+            this.Data = other.Data;
+            this.Error = other.Error;
+            this.ErrorCode = other.ErrorCode;
+
+            return this;
+        }
     }
 }

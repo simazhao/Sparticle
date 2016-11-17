@@ -53,6 +53,10 @@
       <Project>{2AC07AA3-7247-4017-A625-524428DC7A6C}</Project>
       <Name>Sparticle.Result</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Config\Sparticle.Config.MessageCollection\Sparticle.Config.MessageCollection.csproj">
+      <Project>{543C6C85-A8B8-4A13-9123-A5EE35353794}</Project>
+      <Name>Sparticle.Config.MessageCollection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

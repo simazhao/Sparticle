@@ -1,4 +1,5 @@
 ﻿using Sparticle.Common;
+using Sparticle.Config.MessageCollection;
 using Sparticle.Result;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace Sparticle.Service.Handler
             return result;
         }
 
-        private static readonly string SystemInnerError = "system inner error, no proper handler";
         protected virtual ApiResult HandleImpl<TRequest>(InspectContext<TRequest> inspectCxt, Func<TRequest, IFullTrace, ApiResult> finalFunc)
         {
             if (Next != null)
@@ -31,7 +31,7 @@ namespace Sparticle.Service.Handler
                 return Next.Handle(inspectCxt, finalFunc);
             }
 
-            return ApiResult.MakeFailedResult(SystemInnerError);
+            return ApiResult.MakeFailedResult(ErrorMessageCollection.SystemInnerError);
         }
 
         public abstract void AfterHandle<TRequest>(InspectContext<TRequest> inspectCxt, ApiResult result);

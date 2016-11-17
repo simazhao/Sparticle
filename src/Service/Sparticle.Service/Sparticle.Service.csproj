@@ -59,6 +59,10 @@
       <Project>{2AC07AA3-7247-4017-A625-524428DC7A6C}</Project>
       <Name>Sparticle.Result</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Config\Sparticle.Config.LocalSetting\Sparticle.Config.LocalSetting.csproj">
+      <Project>{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}</Project>
+      <Name>Sparticle.Config.LocalSetting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Config\Sparticle.Config.Types\Sparticle.Config.Types.csproj">
       <Project>{27538ef2-8fc5-4f38-a7ef-bf4b5bc63936}</Project>
       <Name>Sparticle.Config.Types</Name>
@@ -70,10 +74,6 @@
     <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
       <Project>{21A5489B-2A56-4357-B570-E87E1DB9F3E6}</Project>
       <Name>Sparticle.SAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Sparticle.Config.LocalSetting\Sparticle.Config.LocalSetting.csproj">
-      <Project>{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}</Project>
-      <Name>Sparticle.Config.LocalSetting</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Support\Cache\Sparticle.Cache\Sparticle.Cache.csproj">
       <Project>{83EF5B45-4876-484B-9ACC-4F059DC67E7A}</Project>

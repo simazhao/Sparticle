@@ -34,6 +34,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,10 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="ExtractUserHandler.cs" />
     <Compile Include="LogHandler.cs" />
     <Compile Include="LogTraceSaver.cs" />
+    <Compile Include="MakeUpHandler.cs" />
     <Compile Include="MongoTraceSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestCheckHandler.cs" />
     <Compile Include="TraceSaver.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,9 +62,21 @@
       <Project>{2AC07AA3-7247-4017-A625-524428DC7A6C}</Project>
       <Name>Sparticle.Result</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Config\Sparticle.Config.MessageCollection\Sparticle.Config.MessageCollection.csproj">
+      <Project>{543C6C85-A8B8-4A13-9123-A5EE35353794}</Project>
+      <Name>Sparticle.Config.MessageCollection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Config\Sparticle.Config.Types\Sparticle.Config.Types.csproj">
       <Project>{27538ef2-8fc5-4f38-a7ef-bf4b5bc63936}</Project>
       <Name>Sparticle.Config.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DTO\Sparticle.Request.Context\Sparticle.Request.Context.csproj">
+      <Project>{7F050A2B-CCBA-4D15-8739-1D1CF3205916}</Project>
+      <Name>Sparticle.Request.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DTO\Sparticle.Request\Sparticle.Request.csproj">
+      <Project>{B6DE123B-1D0E-488B-9921-34F935CE3AB5}</Project>
+      <Name>Sparticle.Request</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Support\Log\Sparticle.Support.Logger\Sparticle.Support.Logger.csproj">
       <Project>{0340a3fd-02a3-440d-b339-e9814492638e}</Project>
