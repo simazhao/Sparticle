@@ -51,5 +51,12 @@ namespace Sparticle.Api.Mvc.Example.Controllers
 
             return Json(result);
         }
+
+        public ActionResult MakeRandom(MakeRandomIntRequest request, RequestContext requestContext)
+        {
+            var result = _exampleService.MakeRandom(request, requestContext);
+
+            return Json(result);
+        }
     }
 }

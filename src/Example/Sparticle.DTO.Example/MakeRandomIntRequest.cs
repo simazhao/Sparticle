@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Sparticle.DTO.Example
 {
-    public class AddRequest : IRequestDto
+    public class MakeRandomIntRequest : IRequestDto
     {
-        public int Num1 { get; set; }
-
-        public int Num2 { get; set; }
+        public int Seconds { get; set; }
     }
 }

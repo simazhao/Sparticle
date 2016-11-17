@@ -10,6 +10,7 @@ using Sparticle.Common;
 using Sparticle.Service.Interface.Example;
 using Sparticle.DTO.Example;
 using Sparticle.SAL.Example;
+using Sparticle.Request;
 
 namespace Sparticle.Service.Example
 {
@@ -67,6 +68,16 @@ namespace Sparticle.Service.Example
 
                 ServiceDebug = true,
             };
+        }
+
+        public ApiResult MakeRandom(MakeRandomIntRequest request, RequestContext requsetContext)
+        {
+            return HandleRequest(nameof(MakeRandom).ToLower(), request, requsetContext, StoreImpl);
+        }
+
+        public ApiResult<int> StoreImpl(MakeRandomIntRequest request, IFullTrace trace)
+        {
+            return CachedData.MakeRandom(request.Seconds);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Sparticle.SAL.Example
                     return ApiResult<int>.MakeFailedResult(calcResult.Error);
                 }
 
-                return ApiResult<int>.MakeSucessResult(calcResult.Data.Number);
+                return ApiResult<int>.MakeSuccessResult(calcResult.Data.Number);
             }
         }
 
@@ -37,7 +37,7 @@ namespace Sparticle.SAL.Example
                     return ApiResult<int>.MakeFailedResult(calcResult.Error);
                 }
 
-                return ApiResult<int>.MakeSucessResult(calcResult.Data.Number);
+                return ApiResult<int>.MakeSuccessResult(calcResult.Data.Number);
             }
         }
     }

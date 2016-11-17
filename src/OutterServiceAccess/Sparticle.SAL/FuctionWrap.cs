@@ -91,7 +91,7 @@ namespace Sparticle.SAL
             callStep.Parameters = StringHelper.GetArgsInfo(t1, t2, t3, t4, t5, t6, t7, t8, t9, 0);
             callStep.Start(methodName);
 
-            var apiResult = ApiResult<TResult>.MakeSucessResult();
+            var apiResult = ApiResult<TResult>.MakeSuccessResult();
             try
             {
                 TResult result = func(t1, t2, t3, t4, t5, t6, t7, t8, t9);

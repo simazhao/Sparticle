@@ -43,6 +43,13 @@
     <Compile Include="AddRequest.cs" />
     <Compile Include="DivRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MakeRandomIntRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DTO\Sparticle.Request\Sparticle.Request.csproj">
+      <Project>{B6DE123B-1D0E-488B-9921-34F935CE3AB5}</Project>
+      <Name>Sparticle.Request</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

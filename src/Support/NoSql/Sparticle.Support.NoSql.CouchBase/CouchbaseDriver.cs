@@ -11,43 +11,64 @@ namespace Sparticle.Support.NoSql.CouchBase
 {
     public class CouchbaseDriver3
     {
-        private CouchbaseClient _client = new CouchbaseClient();
+        private static object locker = new object();
+        private CouchbaseClient _client = null;
+
+        // lazy load client
+        private CouchbaseClient client
+        {
+            get
+            {
+                if (_client == null)
+                {
+                    lock(locker)
+                    {
+                        if (_client == null)
+                        {
+                            _client = new CouchbaseClient();
+                        }
+                    }
+                }
+
+                return _client;
+            }
+        }
 
         public bool Add(string key, object value, TimeSpan expire)
         {
             var json = JsonConvert.SerializeObject(value);
 
-            return _client.Store(StoreMode.Set, key, json, expire);
+            return client.Store(StoreMode.Set, key, json, expire);
         }
 
         public ulong Increment(string key, uint delta, TimeSpan expire, uint init = 1)
         {
-            return _client.Increment(key, init, delta, expire);
+            return client.Increment(key, init, delta, expire);
         }
 
         public ulong Decrement(string key, uint delta, TimeSpan expire, uint init = 1)
         {
-            return _client.Decrement(key, init, delta, expire);
+            return client.Decrement(key, init, delta, expire);
         }
 
         public ulong Increment(string key, ulong defaultValue, uint delta)
         {
-            return _client.Increment(key, defaultValue, delta);
+            return client.Increment(key, defaultValue, delta);
         }
 
         public bool Remove(string key)
         {
-           return _client.Remove(key);
+           return client.Remove(key);
         }
 
         private object Get(string key)
         {
-            return _client.Get(key);
+            return client.Get(key);
         }
 
         private object Get(string key, TimeSpan newExpiration)
         {
-            return _client.Get(key, DateTime.Now.Add(newExpiration));
+            return client.Get(key, DateTime.Now.Add(newExpiration));
         }
 
         public TData Get<TData>(string key)
@@ -78,7 +99,7 @@ namespace Sparticle.Support.NoSql.CouchBase
             {
                 object obj;
 
-                var got = _client.TryGet(key, out obj);
+                var got = client.TryGet(key, out obj);
 
                 got = got && obj != null && (string)obj != "null";
 
@@ -105,7 +126,7 @@ namespace Sparticle.Support.NoSql.CouchBase
             {
                 object obj;
 
-                var got = _client.TryGet(key, DateTime.Now.Add(newExpiration), out obj);
+                var got = client.TryGet(key, DateTime.Now.Add(newExpiration), out obj);
 
                 got = got && null != obj && (string)obj != "null";
 
@@ -127,17 +148,17 @@ namespace Sparticle.Support.NoSql.CouchBase
         public CasedResult<bool> CasAdd(string key, object value, TimeSpan expire, ulong cas)
         {
             var json = JsonConvert.SerializeObject(value);
-            return Convert(_client.Cas(StoreMode.Set, key, json, expire, cas));
+            return Convert(client.Cas(StoreMode.Set, key, json, expire, cas));
         }
 
         public CasedResult<object> GetWithCas(string key)
         {
-            return Convert(_client.GetWithCas(key));
+            return Convert(client.GetWithCas(key));
         }
 
         public CasedResult<TData> GetWithCas<TData>(string key)
         {
-            var casResult = _client.GetWithCas(key);
+            var casResult = client.GetWithCas(key);
 
             return Convert2<TData>(casResult);
         }

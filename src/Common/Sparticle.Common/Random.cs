@@ -89,7 +89,7 @@ namespace Sparticle.Common
 
             this._rng.GetBytes(bytes);
 
-            return Convert.ToInt32(bytes);
+            return BitConverter.ToInt32(bytes, 0);
         }
 
         public override int Next(int maxValue)

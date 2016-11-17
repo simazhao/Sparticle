@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CachedData.cs" />
+    <Compile Include="CacheKeyPrefix.cs" />
     <Compile Include="ExampleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\..\DTO\Sparticle.Request.Context\Sparticle.Request.Context.csproj">
       <Project>{7F050A2B-CCBA-4D15-8739-1D1CF3205916}</Project>
       <Name>Sparticle.Request.Context</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DTO\Sparticle.Request\Sparticle.Request.csproj">
+      <Project>{B6DE123B-1D0E-488B-9921-34F935CE3AB5}</Project>
+      <Name>Sparticle.Request</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
       <Project>{21A5489B-2A56-4357-B570-E87E1DB9F3E6}</Project>

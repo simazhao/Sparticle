@@ -52,6 +52,10 @@
       <Project>{7F050A2B-CCBA-4D15-8739-1D1CF3205916}</Project>
       <Name>Sparticle.Request.Context</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DTO\Sparticle.Request\Sparticle.Request.csproj">
+      <Project>{B6DE123B-1D0E-488B-9921-34F935CE3AB5}</Project>
+      <Name>Sparticle.Request</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sparticle.DTO.Example\Sparticle.DTO.Example.csproj">
       <Project>{A52D6130-B814-419A-9DD2-524B97512DE6}</Project>
       <Name>Sparticle.DTO.Example</Name>

@@ -1,4 +1,5 @@
 ﻿using Sparticle.DTO.Example;
+using Sparticle.Request;
 using Sparticle.Request.Context;
 using Sparticle.Result;
 using System;
@@ -16,5 +17,7 @@ namespace Sparticle.Service.Interface.Example
         ApiResult Add(AddRequest request, RequestContext requestContext);
 
         ApiResult Div(DivRequest request, RequestContext requestContext);
+
+        ApiResult MakeRandom(MakeRandomIntRequest request, RequestContext requsetContext);
     }
 }
