@@ -72,9 +72,9 @@ namespace Sparticle.Support.NoSql.Redis
             return RedisClientManager.Instance.RedisClient.Increment(key, delta);
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
-            RedisClientManager.Instance.RedisClient.Remove(key);
+            return RedisClientManager.Instance.RedisClient.Remove(key);
         }
 
         public TData Get<TData>(string key)

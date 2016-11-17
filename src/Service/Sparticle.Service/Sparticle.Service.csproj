@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="CachedDataHelper.cs" />
     <Compile Include="HttpContextSessionKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestHandlerLoader.cs" />
@@ -69,6 +70,14 @@
     <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
       <Project>{21A5489B-2A56-4357-B570-E87E1DB9F3E6}</Project>
       <Name>Sparticle.SAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sparticle.Config.LocalSetting\Sparticle.Config.LocalSetting.csproj">
+      <Project>{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}</Project>
+      <Name>Sparticle.Config.LocalSetting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Support\Cache\Sparticle.Cache\Sparticle.Cache.csproj">
+      <Project>{83EF5B45-4876-484B-9ACC-4F059DC67E7A}</Project>
+      <Name>Sparticle.Cache</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sparticle.Service.Handler\Sparticle.Service.Handler.csproj">
       <Project>{F14B2B32-FA21-4F6D-B7E7-986750BACFD4}</Project>

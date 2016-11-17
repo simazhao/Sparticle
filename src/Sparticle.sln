@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Cache", "Support\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.SAL.Wcf", "OutterServiceAccess\Sparticle.SAL.Wcf\Sparticle.SAL.Wcf.csproj", "{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Config.LocalSetting", "Sparticle.Config.LocalSetting\Sparticle.Config.LocalSetting.csproj", "{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +177,10 @@ Global
 		{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,5 +213,6 @@ Global
 		{A84EC631-EDBC-47FF-8A5C-8674747D0AF1} = {39C6926E-C793-4496-A332-75843DDFFB41}
 		{83EF5B45-4876-484B-9ACC-4F059DC67E7A} = {A84EC631-EDBC-47FF-8A5C-8674747D0AF1}
 		{2DCB17C6-F271-4CAE-98E1-FB31657B78FC} = {4086EF81-43B3-4BF0-80F2-C1A54AC3C67C}
+		{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D} = {B8B9AAAE-F975-4E2B-B27C-B3C9D430AF50}
 	EndGlobalSection
 EndGlobal

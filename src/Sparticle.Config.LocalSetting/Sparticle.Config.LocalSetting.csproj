@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{83EF5B45-4876-484B-9ACC-4F059DC67E7A}</ProjectGuid>
+    <ProjectGuid>{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sparticle.Cache</RootNamespace>
-    <AssemblyName>Sparticle.Cache</AssemblyName>
+    <RootNamespace>Sparticle.Config.LocalSetting</RootNamespace>
+    <AssemblyName>Sparticle.Config.LocalSetting</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,13 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,30 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheBuilder.cs" />
-    <Compile Include="CacheInstance.cs" />
-    <Compile Include="CacheNothingPolicy.cs" />
-    <Compile Include="CouchBasePolicy.cs" />
-    <Compile Include="ICachePolicy.cs" />
-    <Compile Include="ICountableCachePolicy.cs" />
-    <Compile Include="IMixedCachePolicy.cs" />
-    <Compile Include="MixedCachePolicy.cs" />
+    <Compile Include="GlobalCacheExpireConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedisCachePolicy.cs" />
-    <Compile Include="RuntimeCachePolicy.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\NoSql\Sparticle.Support.NoSql.CouchBase\Sparticle.Support.NoSql.CouchBase.csproj">
-      <Project>{30311D6C-9AED-4634-A56E-40FAA8776FFE}</Project>
-      <Name>Sparticle.Support.NoSql.CouchBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\NoSql\Sparticle.Support.NoSql.Redis\Sparticle.Support.NoSql.Redis.csproj">
-      <Project>{B58F9386-2948-4835-8962-368A82CC26D9}</Project>
-      <Name>Sparticle.Support.NoSql.Redis</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

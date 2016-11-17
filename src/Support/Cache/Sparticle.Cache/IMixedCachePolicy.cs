@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Cache
 {
-    public class Class1
+    public interface IMixedCachePolicy : ICachePolicy
     {
+        void SetPolicies(params ICachePolicy[] policies);
+
+        ICachePolicy[] Policies { get; }
     }
 }
