@@ -6,13 +6,16 @@ using System.Text;
 
 namespace FundTrade.API.Service.Common
 {
-    public class RequestHandlerOrderSections : ConfigurationSection
+    /// <summary>
+    /// RequestHandlerOrder Config Section
+    /// </summary>
+    public class RequestHandlerOrderSection : ConfigurationSection
     {
-        [ConfigurationProperty("Sections", IsRequired = true)]
-        public RequestConfigSourceCollection RequestHandlerOrderSection
+        [ConfigurationProperty("Handlers", IsRequired = true)]
+        public RequestConfigHanlders RequestConfigHanlders
         {
-            get { return (RequestConfigSourceCollection)base["Sections"]; }
-            set { base["Sections"] = value; }
+            get { return (RequestConfigHanlders)base["Handlers"]; }
+            set { base["Handlers"] = value; }
         }
 
         public override bool IsReadOnly()
@@ -21,16 +24,19 @@ namespace FundTrade.API.Service.Common
         }
     }
 
-    public class RequestConfigSourceCollection : ConfigurationElementCollection
+    /// <summary>
+    /// RequestHandlerOrder Config Section
+    /// </summary>
+    public class RequestConfigHanlders : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {
-            return new RequestHandlerOrderSection();
+            return new RequestHandlerOrder();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((RequestHandlerOrderSection)element).Handler;
+            return ((RequestHandlerOrder)element).Handler;
 
         }
 
@@ -41,15 +47,15 @@ namespace FundTrade.API.Service.Common
 
         public IEnumerable<string> AllKeys { get { return BaseGetAllKeys().Cast<string>(); } }
 
-        public new RequestHandlerOrderSection this[string name]
+        public new RequestHandlerOrder this[string name]
         {
             get
             {
                 if (this.BaseGetAllKeys().Contains(name))
                 {
-                    return (RequestHandlerOrderSection)BaseGet(name);
+                    return (RequestHandlerOrder)BaseGet(name);
                 }
-                return new RequestHandlerOrderSection();
+                return new RequestHandlerOrder();
 
             }
         }
@@ -59,7 +65,7 @@ namespace FundTrade.API.Service.Common
             this.BaseAdd(element);
         }
 
-        public void Add(IEnumerable<RequestHandlerOrderSection> elements)
+        public void Add(IEnumerable<RequestHandlerOrder> elements)
         {
             if (elements == null || !elements.Any())
             {
@@ -75,9 +81,9 @@ namespace FundTrade.API.Service.Common
 
 
     /// <summary>
-    /// Section 信息
+    /// RequestHandler Order 
     /// </summary>
-    public class RequestHandlerOrderSection : ConfigurationElement
+    public class RequestHandlerOrder : ConfigurationElement
     {
         [ConfigurationProperty("Handler", IsRequired = true)]
         public string Handler

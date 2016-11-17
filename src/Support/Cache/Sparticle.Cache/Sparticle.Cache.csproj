@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A4931E8D-B8EF-496F-BFFE-7D5BDD8CCC21}</ProjectGuid>
+    <ProjectGuid>83ef5b45-4876-484b-9acc-4f059dc67e7a</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sparticle.SAL.Example</RootNamespace>
-    <AssemblyName>Sparticle.SAL.Example</AssemblyName>
+    <RootNamespace>Sparticle.Cache</RootNamespace>
+    <AssemblyName>Sparticle.Cache</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,37 +30,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System"/>
+    
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    
+    
+    <Reference Include="Microsoft.CSharp"/>
+    
+    <Reference Include="System.Data"/>
+    
+    <Reference Include="System.Net.Http"/>
+    
+    <Reference Include="System.Xml"/>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExampleAccess.cs" />
-    <Compile Include="ExampleServiceWrapper.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Sparticle.Result\Sparticle.Result.csproj">
-      <Project>{2AC07AA3-7247-4017-A625-524428DC7A6C}</Project>
-      <Name>Sparticle.Result</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL.Wcf\Sparticle.SAL.Wcf.csproj">
-      <Project>{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}</Project>
-      <Name>Sparticle.SAL.Wcf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL\Sparticle.SAL.csproj">
-      <Project>{21a5489b-2a56-4357-b570-e87e1db9f3e6}</Project>
-      <Name>Sparticle.SAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sparticle.OutterService.Wcf.Example.Interface\Sparticle.OutterService.Wcf.Example.Interface.csproj">
-      <Project>{4B62E13D-EFB1-43E1-96FA-810E390C9E13}</Project>
-      <Name>Sparticle.OutterService.Wcf.Example.Interface</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -70,4 +57,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-</Project>
+
+ </Project>

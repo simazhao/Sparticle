@@ -78,16 +78,16 @@ namespace Sparticle.Service
 
         private static IDictionary<string, int> LoadHandlersOrder()
         {
-            var sections = ConfigurationManager.GetSection("RequestHandlerOrderSections") as RequestHandlerOrderSections;
+            var sections = ConfigurationManager.GetSection("RequestHandlerOrderSection") as RequestHandlerOrderSection;
 
             if (sections == null)
-                throw new ConfigurationErrorsException("do not config [RequestHandlerOrderSections]");
+                throw new ConfigurationErrorsException("do not config [RequestHandlerOrderSection]");
 
             var ret = new Dictionary<string, int>();
 
-            foreach (var key in sections.RequestHandlerOrderSection.AllKeys)
+            foreach (var key in sections.RequestConfigHanlders.AllKeys)
             {
-                var section = sections.RequestHandlerOrderSection[key];
+                var section = sections.RequestConfigHanlders[key];
 
                 ret[section.Handler] = section.Order;
             }
