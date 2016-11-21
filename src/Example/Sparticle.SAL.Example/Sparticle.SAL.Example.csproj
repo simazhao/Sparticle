@@ -32,6 +32,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,11 +45,20 @@
     <Compile Include="ExampleAccess.cs" />
     <Compile Include="ExampleServiceWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceCollectionReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Sparticle.Result\Sparticle.Result.csproj">
       <Project>{2AC07AA3-7247-4017-A625-524428DC7A6C}</Project>
       <Name>Sparticle.Result</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Config\Sparticle.Config.LocalSetting\Sparticle.Config.LocalSetting.csproj">
+      <Project>{2CB17517-D111-4DFE-9FDB-1730D2DE4F2D}</Project>
+      <Name>Sparticle.Config.LocalSetting</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OutterServiceAccess\Sparticle.SAL.Wcf\Sparticle.SAL.Wcf.csproj">
       <Project>{2DCB17C6-F271-4CAE-98E1-FB31657B78FC}</Project>
@@ -61,6 +72,46 @@
       <Project>{4B62E13D-EFB1-43E1-96FA-810E390C9E13}</Project>
       <Name>Sparticle.OutterService.Wcf.Example.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection.wsdl" />
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCollectionReference\Sparticle.SAL.Example.ServiceCollectionReference.ServiceAddressResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceCollectionReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCollectionReference\ServiceCollection.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCollectionReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCollectionReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCollectionReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

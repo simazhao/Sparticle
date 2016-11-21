@@ -11,5 +11,7 @@ namespace Sparticle.Config.LocalSetting
     {
         public static readonly string HandlerPluginDir = ConfigurationManager.AppSettings["HandlersDir"];
 
+        public static readonly string MachineNo = ConfigurationManager.AppSettings["MachineNo"];
+
     }
 }

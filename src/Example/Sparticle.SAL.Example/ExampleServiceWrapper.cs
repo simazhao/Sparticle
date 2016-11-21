@@ -1,4 +1,6 @@
-﻿using Sparticle.SAL.Wcf;
+﻿using Sparticle.Config.LocalSetting;
+using Sparticle.SAL.Example.ServiceCollectionReference;
+using Sparticle.SAL.Wcf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,29 @@ namespace Sparticle.SAL.Example
     {
         protected override ServiceAddressModel GetServiceAddress(string machineNo, string serviceIdentity)
         {
-            // use hard code, just for example, do not real use in product.
-            var host = "http://localhost:25485";
+            var client = new ServiceCollectionClient();
+
+            var address = client.GetServiceAddress(new ServiceAddressRequest()
+            {
+                No = LocalConfig.MachineNo,
+
+                ServiceGroup = "ExampleGroup",
+
+                ServiceIdentity = serviceIdentity,
+
+                MMode = ServiceAddressRequest.MatchMode.No,
+            });
+
+            client.Close();
+
+            if (address == null)
+                return null;
 
             return new ServiceAddressModel()
             {
-                Address = string.Format("{0}/{1}.svc", host, serviceIdentity),
-                ServiceIdentity = serviceIdentity,
-                PropertyList = new Dictionary<string, string> { {"binding", "basicHttpBinding" } }
+                Address = address.Address,
+                ServiceIdentity = address.ServiceIdentity, 
+                PropertyList = address.PropertyList,
             };
         }
     }

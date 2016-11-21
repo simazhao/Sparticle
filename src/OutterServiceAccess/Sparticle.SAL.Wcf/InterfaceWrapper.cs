@@ -19,12 +19,10 @@ namespace Sparticle.SAL.Wcf
 
         public SvcWrapper<TService> GetTService<TService>(string machineNo)
             where TService : class
-        {
-            string serviceName = typeof(TService).Name.Substring(1);
-
+        {          
             string serviceIdentity = typeof(TService).FullName;
 
-            ServiceAddressModel serviceAddress = GetServiceAddress(machineNo, serviceName);
+            ServiceAddressModel serviceAddress = GetServiceAddress(machineNo, serviceIdentity);
 
             return WcfFactory.Instance.CreateServiceWrapper<TService>(serviceAddress.PropertyList["binding"], serviceAddress.Address);
         }

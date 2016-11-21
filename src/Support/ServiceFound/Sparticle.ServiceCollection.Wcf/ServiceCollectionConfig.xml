@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ServiceCollectionConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Services>
+    <ServiceForMachine Identity="Sparticle.OutterService.Wcf.Example.Interface.ICaculator" Desc="" Group="ExampleGroup">
+      <PropList>
+        <Add Key="binding" Value="basicHttpBinding" />
+      </PropList>
+      <Machines>
+        <Machine ClientIp="::1" No="Online-1" ServiceAddress="http://localhost:25485/Caculator.svc" />
+      </Machines>
+    </ServiceForMachine>
+  </Services>
+</ServiceCollectionConfig>

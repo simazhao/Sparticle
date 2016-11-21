@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Sparticle.ServiceKeeper.Wcf.Service1" CodeBehind="ServiceKeeper.svc.cs" %>
