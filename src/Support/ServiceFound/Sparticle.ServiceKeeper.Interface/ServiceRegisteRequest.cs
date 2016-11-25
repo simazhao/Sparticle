@@ -14,6 +14,6 @@ namespace Sparticle.ServiceKeeper.Interface
         public string ServiceIdentity { get; set; }
 
         [DataMember]
-        ServiceAddress address { get; set; }
+        public ServiceAddress Address { get; set; }
     }
 }
