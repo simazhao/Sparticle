@@ -19,7 +19,7 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         public ServiceAddress GetServiceAddress(string serviceIdentity)
         {
-            throw new NotImplementedException();
+            return pool.GetOne(serviceIdentity);
         }
 
         public bool Register(ServiceRegisteRequest request)

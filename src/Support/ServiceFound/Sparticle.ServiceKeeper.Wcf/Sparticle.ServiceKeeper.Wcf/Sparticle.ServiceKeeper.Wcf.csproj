@@ -93,6 +93,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisposeAction.cs" />
+    <Compile Include="ReaderWriterLockSlimExtends.cs" />
     <Compile Include="ServiceAddressBucket.cs" />
     <Compile Include="ServiceAddressNode.cs" />
     <Compile Include="ServiceAddressNodeList.cs" />

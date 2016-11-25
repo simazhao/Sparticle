@@ -14,30 +14,56 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         public bool TryAdd(ServiceAddressNode node)
         {
-            var ret = false;
-            return ret;
+            using (_locker.WriteLock())
+            {
+                if (node == null)
+                    return false;
+
+                if (_nodes.Find(item => item.Address == node.Address) != null)
+                    return false;
+
+                _nodes.Add(node);
+                return true;
+            }
         }
 
         public bool TryRemove(ServiceAddressNode node)
         {
-            return false;
+            using (_locker.WriteLock())
+            {
+                return _nodes.Remove(node);
+            }
         }
 
         public bool TryGet(int index, out ServiceAddressNode node)
         {
             node = null;
 
-            return false;
+            using (_locker.ReadLock())
+            {
+                if (index < 0 || index >= _nodes.Count)
+                    return false;
+
+                node = _nodes[index];
+
+                return true;
+            }
         }
 
         public int IndexOf(ServiceAddressNode node)
         {
-            return -1;
+            using (_locker.ReadLock())
+            {
+                return _nodes.IndexOf(node);
+            }
         }
 
-        public ServiceAddressNode Find(Func<ServiceAddressNode, bool> judge)
+        public ServiceAddressNode Find(Predicate<ServiceAddressNode> match)
         {
-            return null;
+            using (_locker.ReadLock())
+            {
+                return _nodes.Find(match);
+            }
         }
 
         public int Count

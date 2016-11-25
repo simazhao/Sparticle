@@ -24,28 +24,31 @@ namespace Sparticle.ServiceKeeper.Wcf
         private int userHighWaterMark = 21;
         public ServiceAddress GetOne(string serviceIdentity)
         {
+            if (string.IsNullOrWhiteSpace(serviceIdentity))
+                return null;
+
             ServiceAddressBucket bucket;
             if (!_buckets.TryGetValue(serviceIdentity, out bucket))
                 return null;
 
             var head = Volatile.Read(ref bucket.Head);
 
-            ServiceAddressNode node;
+            ServiceAddressNode node = null;
             while (true)
             {
                 if (bucket.AvaliableSerivces.TryGet(head, out node))
-                    return null;
+                    break;
 
                 var count = bucket.AvaliableSerivces.Count;
                 var end = (head + count - 1) % bucket.AvaliableSerivces.Count;
 
                 if (head == end)
-                    return node;
+                    break;
 
                 if ((node.AccessCount + 1)% userHighWaterMark != 0)
                 {
                     Interlocked.Increment(ref node.AccessCount);
-                    return node;
+                    break;
                 }
                 else
                 {
@@ -56,6 +59,8 @@ namespace Sparticle.ServiceKeeper.Wcf
                     head = bucket.Head;
                 }
             }
+
+            return node;
         }
 
         private void IncrementHead(ref int head, int oldhead, int nexthead)
