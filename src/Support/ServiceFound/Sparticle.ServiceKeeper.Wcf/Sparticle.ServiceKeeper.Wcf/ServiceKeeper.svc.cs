@@ -15,7 +15,7 @@ namespace Sparticle.ServiceKeeper.Wcf
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ServiceKeeper : IServiceRegister, IServiceKeeper
     {
-        private static ServiceAddressPool pool = new ServiceAddressPool();
+        private static ServiceAddressPool pool = ServiceAddressPool.Instance;
 
         public ServiceAddress GetServiceAddress(string serviceIdentity)
         {
@@ -24,12 +24,12 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         public bool Register(ServiceRegisteRequest request)
         {
-            return pool.Add(request.Address, request.ServiceIdentity);
+            return pool.Add(request.Address, request.ServiceIdentity, GetClientIp());
         }
 
         public bool UnRegister(ServiceUnregisteRequest request)
         {
-            throw new NotImplementedException();
+            return pool.Remove(request.ServiceIdentity, GetClientIp());
         }
 
         private string GetClientIp()

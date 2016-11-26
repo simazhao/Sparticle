@@ -10,15 +10,31 @@ namespace Sparticle.ServiceKeeper.Wcf
 {
     internal class ServiceAddressPool
     {
-        private ConcurrentDictionary<string, ServiceAddressBucket> _buckets = new ConcurrentDictionary<string, ServiceAddressBucket>();
+        private readonly ConcurrentDictionary<string, ServiceAddressBucket> _buckets = new ConcurrentDictionary<string, ServiceAddressBucket>();
 
-        public bool Add(ServiceAddress address, string serviceIdentity)
+        public static ServiceAddressPool Instance = new ServiceAddressPool();
+
+        public IEnumerator<KeyValuePair<string, ServiceAddressBucket>> GetEnumerator()
+        {
+            return _buckets.GetEnumerator();
+        } 
+
+        public bool Add(ServiceAddress address, string serviceIdentity, string ip)
         {
             var bucket = _buckets.GetOrAdd(serviceIdentity, (sid) => {
                 return new ServiceAddressBucket(sid);
             });
 
-            return bucket.Add(address);
+            return bucket.Add(address, ip);
+        }
+
+        public bool Remove(string serviceIndentity, string ip)
+        {
+            ServiceAddressBucket bucket;
+            if (!_buckets.TryGetValue(serviceIndentity, out bucket))
+                return false;
+
+            return bucket.Remove(ip);
         }
 
         private int userHighWaterMark = 21;
@@ -36,11 +52,11 @@ namespace Sparticle.ServiceKeeper.Wcf
             ServiceAddressNode node = null;
             while (true)
             {
-                if (bucket.AvaliableSerivces.TryGet(head, out node))
+                if (bucket.Get(head, out node))
                     break;
 
-                var count = bucket.AvaliableSerivces.Count;
-                var end = (head + count - 1) % bucket.AvaliableSerivces.Count;
+                var count = bucket.AvaliableCount;
+                var end = (head + count - 1) % count;
 
                 if (head == end)
                     break;
@@ -73,6 +89,31 @@ namespace Sparticle.ServiceKeeper.Wcf
                     break;
 
                 spinwait.SpinOnce();
+            }
+        }
+
+        public ServiceAddressPoolModel ToModel()
+        {
+            var model = new ServiceAddressPoolModel();
+            model.Buckets = new Dictionary<string, ServiceAddressBucketModel>();
+
+            foreach (var kv in this._buckets)
+            {
+                var bucket = kv.Value.ToModel();
+
+                model.Buckets.Add(kv.Key, bucket);
+            }
+
+            return model;
+        }
+
+        public void FromModel(ServiceAddressPoolModel model)
+        {
+            foreach(var kv in model.Buckets)
+            {
+                var bucket = new ServiceAddressBucket(kv.Key);
+                bucket.FromModel(kv.Value);
+                this._buckets.TryAdd(kv.Key, bucket);
             }
         }
     }

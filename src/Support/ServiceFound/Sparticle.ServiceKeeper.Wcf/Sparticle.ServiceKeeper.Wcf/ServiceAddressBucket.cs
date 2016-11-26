@@ -10,53 +10,130 @@ namespace Sparticle.ServiceKeeper.Wcf
 {
     internal class ServiceAddressBucket
     {
-        public string ServiceIdentity { get; set; }
-    
-        public ServiceAddressNodeList AvaliableSerivces { get; set; }
+        public string ServiceIdentity { get; private set; }
 
-        public ServiceAddressNodeList UnAvaliableSerivces { get; set; }
+        private readonly ServiceAddressNodeList avaliableSerivces;
+
+        private readonly ServiceAddressNodeList unAvaliableSerivces;
 
         public int Head;
+
+        public IEnumerable<ServiceAddressNode> Avaliable
+        {
+            get
+            {
+                return avaliableSerivces;
+            }
+        }
+
+        public IEnumerable<ServiceAddressNode> Unavaliable
+        {
+            get
+            {
+                return unAvaliableSerivces;
+            }
+        }
 
         public ServiceAddressBucket(string serviceIdentity)
         {
             ServiceIdentity = serviceIdentity;
 
-            AvaliableSerivces = new ServiceAddressNodeList();
+            avaliableSerivces = new ServiceAddressNodeList();
 
-            UnAvaliableSerivces = new ServiceAddressNodeList();
+            unAvaliableSerivces = new ServiceAddressNodeList();
 
             Head = 0;
         }
 
-        public bool Exists(ServiceAddress address)
+        public int AvaliableCount
         {
-            return AvaliableSerivces.Find(addr => addr.Address == address.Address) != null;
+            get
+            {
+                return avaliableSerivces.Count;
+            }
         }
 
-        public bool Add(ServiceAddress address)
+        public int UnavaliableCount
         {
-            return this.AvaliableSerivces.TryAdd(new ServiceAddressNode(address));
+            get
+            {
+                return unAvaliableSerivces.Count;
+            }
+        }
+
+        public bool Get(int index, out ServiceAddressNode node)
+        {
+            return this.avaliableSerivces.TryGet(index, out node);
+        }
+
+        public bool Exists(ServiceAddress address)
+        {
+            return avaliableSerivces.Find(addr => addr.Address == address.Address) != null;
+        }
+
+        public bool Add(ServiceAddress address, string ip)
+        {
+            return this.avaliableSerivces.TryAdd(new ServiceAddressNode(address, ip));
         }
 
         public bool Remove(ServiceAddressNode node)
         {
-            return this.AvaliableSerivces.TryRemove(node);
+            var removed = this.avaliableSerivces.TryRemove(node);
+
+            return removed;
+        }
+
+        public bool Remove(string ip)
+        {
+            var removed = this.avaliableSerivces.TryRemove(node => node.Match(ip));
+
+            return removed != null;
         }
 
         public bool Unuse(ServiceAddressNode node)
         {
             if (Remove(node))
             {
-                return this.UnAvaliableSerivces.TryAdd(node);
+                return this.unAvaliableSerivces.TryAdd(node);
             }
 
             return false;
         }
+
+        public bool Reuse(ServiceAddressNode node)
+        {
+            if (this.unAvaliableSerivces.TryRemove(node))
+            {
+                return this.avaliableSerivces.TryAdd(node);
+            }
+
+            return false;
+        }
+
+        public ServiceAddressBucketModel ToModel()
+        {
+            var model = new ServiceAddressBucketModel();
+            model.AvaliableSerivces = new List<ServiceAddressNodeModel>();
+            model.UnAvaliableSerivces = new List<ServiceAddressNodeModel>();
+
+            foreach(var node in avaliableSerivces)
+            {
+                model.AvaliableSerivces.Add(node.ToModel());
+            }
+
+            foreach (var node in unAvaliableSerivces)
+            {
+                model.UnAvaliableSerivces.Add(node.ToModel());
+            }
+
+            return model;
+        }
+
+        public void FromModel(ServiceAddressBucketModel model)
+        {
+            this.avaliableSerivces.FromModel(model.AvaliableSerivces);
+
+            this.unAvaliableSerivces.FromModel(model.UnAvaliableSerivces);
+        }
     }
-
-    
-
-
-
 }

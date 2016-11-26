@@ -10,15 +10,40 @@ namespace Sparticle.ServiceKeeper.Wcf
     {
         public int AccessCount = 0;
 
+        private string ClientIp;
+
         public ServiceAddressNode()
         {
 
         }
 
-        public ServiceAddressNode(ServiceAddress address)
+        public ServiceAddressNode(ServiceAddress address, string ip)
         {
             this.Address = address.Address;
             this.PropertyList = address.PropertyList;
+            this.ClientIp = ip;
+        }
+
+        public bool Match(string ip)
+        {
+            return string.Compare(this.ClientIp, ip) == 0;
+        }
+
+        public ServiceAddressNodeModel ToModel()
+        {
+            return new ServiceAddressNodeModel()
+            {
+                Address = this.Address,
+                ClientIp = this.ClientIp,
+                PropertyList = this.PropertyList,
+            };
+        }
+
+        public void FromModel(ServiceAddressNodeModel model)
+        {
+            this.Address = model.Address;
+            this.ClientIp = model.ClientIp;
+            this.PropertyList = model.PropertyList;
         }
     }
 

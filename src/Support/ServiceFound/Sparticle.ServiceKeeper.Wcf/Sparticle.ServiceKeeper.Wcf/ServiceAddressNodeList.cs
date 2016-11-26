@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -6,11 +7,20 @@ using System.Web;
 
 namespace Sparticle.ServiceKeeper.Wcf
 {
-    internal class ServiceAddressNodeList 
+    internal class ServiceAddressNodeList : IEnumerable<ServiceAddressNode>
     {
-        private List<ServiceAddressNode> _nodes = new List<ServiceAddressNode>();
+        private readonly List<ServiceAddressNode> _nodes = new List<ServiceAddressNode>();
 
         private ReaderWriterLockSlim _locker = new ReaderWriterLockSlim();
+
+        public IEnumerator<ServiceAddressNode> GetEnumerator()
+        {
+            using (_locker.ReadLock())
+            {
+                var nodes = new List<ServiceAddressNode>(_nodes.ToArray());
+                return nodes.GetEnumerator();
+            }
+        }
 
         public bool TryAdd(ServiceAddressNode node)
         {
@@ -19,12 +29,17 @@ namespace Sparticle.ServiceKeeper.Wcf
                 if (node == null)
                     return false;
 
-                if (_nodes.Find(item => item.Address == node.Address) != null)
-                    return false;
-
-                _nodes.Add(node);
-                return true;
+                return DistinctAdd(node);
             }
+        }
+
+        private bool DistinctAdd(ServiceAddressNode node)
+        {
+            if (_nodes.Find(item => item.Address == node.Address) != null)
+                return false;
+
+            _nodes.Add(node);
+            return true;
         }
 
         public bool TryRemove(ServiceAddressNode node)
@@ -32,6 +47,29 @@ namespace Sparticle.ServiceKeeper.Wcf
             using (_locker.WriteLock())
             {
                 return _nodes.Remove(node);
+            }
+        }
+
+        public void TryRemoveAt(int index)
+        {
+            using (_locker.WriteLock())
+            {
+                _nodes.RemoveAt(index);
+            }
+        }
+
+        public ServiceAddressNode TryRemove(Predicate<ServiceAddressNode> match)
+        {
+            using (_locker.WriteLock())
+            {
+                ServiceAddressNode node = _nodes.Find(match);
+
+                if (node != null)
+                {
+                    _nodes.Remove(node);
+                }
+
+                return node;
             }
         }
 
@@ -66,11 +104,43 @@ namespace Sparticle.ServiceKeeper.Wcf
             }
         }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<ServiceAddressNode>)_nodes).GetEnumerator();
+        }
+
         public int Count
         {
             get
             {
                 return _nodes.Count;
+            }
+        }
+
+        public ServiceAddressNode this[int index]
+        {
+            get
+            {
+                using (_locker.ReadLock())
+                {
+                    return _nodes[index];
+                }
+            }
+        }
+
+        public void FromModel(List<ServiceAddressNodeModel> model)
+        {
+            using (_locker.WriteLock())
+            {
+                foreach(var node in model)
+                {
+                    if (_nodes.Find(item => item.Address == node.Address) != null)
+                        continue;
+
+                    var newnode = new ServiceAddressNode();
+                    newnode.FromModel(node);
+                    _nodes.Add(newnode);
+                }
             }
         }
     }
