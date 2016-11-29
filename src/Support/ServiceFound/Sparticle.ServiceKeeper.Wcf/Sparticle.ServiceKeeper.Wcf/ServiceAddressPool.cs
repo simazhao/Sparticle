@@ -37,8 +37,9 @@ namespace Sparticle.ServiceKeeper.Wcf
             return bucket.Remove(ip);
         }
 
-        private int userHighWaterMark = 21;
-        public ServiceAddress GetOne(string serviceIdentity)
+        private const int waterMarkStep = 5;
+        private int userHighWaterMark = waterMarkStep;
+        public ServiceAddressNode GetOne(string serviceIdentity)
         {
             if (string.IsNullOrWhiteSpace(serviceIdentity))
                 return null;
@@ -48,48 +49,56 @@ namespace Sparticle.ServiceKeeper.Wcf
                 return null;
 
             var head = Volatile.Read(ref bucket.Head);
+            int waterMark = userHighWaterMark;
 
             ServiceAddressNode node = null;
             while (true)
             {
-                if (bucket.Get(head, out node))
+                if (!bucket.Get(head, out node))
                     break;
 
                 var count = bucket.AvaliableCount;
-                var end = (head + count - 1) % count;
 
-                if (head == end)
-                    break;
-
-                if ((node.AccessCount + 1)% userHighWaterMark != 0)
+                if ((node.AccessCount + 1)% (waterMark + 1) != 0)
                 {
                     Interlocked.Increment(ref node.AccessCount);
                     break;
                 }
                 else
                 {
+                    if (IncreaseWaterMark(ref userHighWaterMark, waterMark, waterMarkStep))
+                    {
+                        waterMark = userHighWaterMark;
+                    }
+                    else
+                    {
+                        waterMark = Volatile.Read(ref userHighWaterMark);
+                    }
+
                     var nexthead = (head + 1) % count;
 
-                    IncrementHead(ref bucket.Head, head, nexthead);
-
-                    head = bucket.Head;
+                    if (IncrementHead(ref bucket.Head, head, nexthead))
+                    {
+                        head = bucket.Head;
+                    }
+                    else
+                    {
+                        head = Volatile.Read(ref bucket.Head);
+                    }
                 }
             }
 
             return node;
         }
 
-        private void IncrementHead(ref int head, int oldhead, int nexthead)
+        private bool IncreaseWaterMark(ref int waterMark, int oldWaterMark, int add)
         {
-            SpinWait spinwait = new SpinWait();
+            return (Interlocked.CompareExchange(ref waterMark, oldWaterMark + add, oldWaterMark) == oldWaterMark);
+        }
 
-            while (true)
-            {
-                if (Interlocked.CompareExchange(ref head, nexthead, oldhead) == head)
-                    break;
-
-                spinwait.SpinOnce();
-            }
+        private bool IncrementHead(ref int head, int oldhead, int nexthead)
+        {
+            return (Interlocked.CompareExchange(ref head, nexthead, oldhead) == head);
         }
 
         public ServiceAddressPoolModel ToModel()

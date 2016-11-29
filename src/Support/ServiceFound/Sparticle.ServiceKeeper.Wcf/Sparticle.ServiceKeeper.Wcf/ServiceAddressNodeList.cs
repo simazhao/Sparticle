@@ -35,7 +35,7 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         private bool DistinctAdd(ServiceAddressNode node)
         {
-            if (_nodes.Find(item => item.Address == node.Address) != null)
+            if (_nodes.Find(item => item.Address == node.Address || item.MatchIp(node)) != null)
                 return false;
 
             _nodes.Add(node);

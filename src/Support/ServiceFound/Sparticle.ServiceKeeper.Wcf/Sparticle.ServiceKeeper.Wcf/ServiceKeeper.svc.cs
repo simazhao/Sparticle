@@ -19,7 +19,12 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         public ServiceAddress GetServiceAddress(string serviceIdentity)
         {
-            return pool.GetOne(serviceIdentity);
+            var node = pool.GetOne(serviceIdentity);
+
+            if (node == null)
+                return null;
+
+            return node.CopyBase();
         }
 
         public bool Register(ServiceRegisteRequest request)

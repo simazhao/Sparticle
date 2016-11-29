@@ -7,7 +7,7 @@ namespace Sparticle.ServiceKeeper.Wcf
 {
     internal class ServiceAddressPoolModel
     {
-        public IDictionary<string, ServiceAddressBucketModel> Buckets { get; set; }
+        public Dictionary<string, ServiceAddressBucketModel> Buckets { get; set; }
     }
 
     internal class ServiceAddressBucketModel

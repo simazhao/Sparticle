@@ -10,8 +10,10 @@ namespace Sparticle.ServiceKeeper.Interface
     [ServiceContract]
     public interface IServiceRegister
     {
+        [OperationContract]
         bool Register(ServiceRegisteRequest request);
 
+        [OperationContract]
         bool UnRegister(ServiceUnregisteRequest request);
     }
 }

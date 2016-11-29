@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4500c98d-701a-459a-8132-1769502a32f2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:10860/ServiceKeeper.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceKeeper.wsdl" MetadataType="Wsdl" ID="18a30496-815d-465e-9a0a-372f34e47611" SourceId="1" SourceUrl="http://localhost:10860/ServiceKeeper.svc?wsdl" />
+    <MetadataFile FileName="ServiceKeeper1.xsd" MetadataType="Schema" ID="9db3dc82-0cfc-4ef0-a326-8d636badd106" SourceId="1" SourceUrl="http://localhost:10860/ServiceKeeper.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceKeeper2.xsd" MetadataType="Schema" ID="459ed296-6ff4-4724-9536-3a6b498dff74" SourceId="1" SourceUrl="http://localhost:10860/ServiceKeeper.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceKeeper.xsd" MetadataType="Schema" ID="65cb94b8-80ec-4e50-a5c5-fb83a2388cf7" SourceId="1" SourceUrl="http://localhost:10860/ServiceKeeper.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceKeeper.disco" MetadataType="Disco" ID="3908351e-b324-4532-9a10-373fb06be52c" SourceId="1" SourceUrl="http://localhost:10860/ServiceKeeper.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

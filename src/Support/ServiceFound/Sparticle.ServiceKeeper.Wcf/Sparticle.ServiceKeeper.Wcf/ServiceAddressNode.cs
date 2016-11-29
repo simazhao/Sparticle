@@ -24,9 +24,23 @@ namespace Sparticle.ServiceKeeper.Wcf
             this.ClientIp = ip;
         }
 
+        public ServiceAddress CopyBase()
+        {
+            return new ServiceAddress()
+            {
+                Address = this.Address,
+                PropertyList = this.PropertyList,
+            };
+        }
+
         public bool Match(string ip)
         {
             return string.Compare(this.ClientIp, ip) == 0;
+        }
+
+        public bool MatchIp(ServiceAddressNode another)
+        {
+            return Match(another.ClientIp);
         }
 
         public ServiceAddressNodeModel ToModel()
