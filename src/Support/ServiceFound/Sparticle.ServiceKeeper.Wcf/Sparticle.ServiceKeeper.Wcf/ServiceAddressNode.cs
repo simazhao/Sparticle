@@ -2,13 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace Sparticle.ServiceKeeper.Wcf
 {
     internal class ServiceAddressNode : ServiceAddress
     {
-        public int AccessCount = 0;
+        private const int waterMarkStep = 20;
+        private const int userHighWaterMark = waterMarkStep * 10000000;
+        private volatile int userLowWaterMark = waterMarkStep;
+
+        public volatile int AccessCount = 0;
 
         private string ClientIp;
 
@@ -33,14 +38,20 @@ namespace Sparticle.ServiceKeeper.Wcf
             };
         }
 
-        public bool Match(string ip)
+        public bool MatchIp(string ip)
         {
             return string.Compare(this.ClientIp, ip) == 0;
         }
 
-        public bool MatchIp(ServiceAddressNode another)
+        public bool MatchAddress(string address)
         {
-            return Match(another.ClientIp);
+            return string.Compare(Address, address, true) == 0;
+        }
+
+        public bool Match(ServiceAddressNode another)
+        {
+            return MatchAddress(another.Address);
+            //return MatchIp(another.ClientIp) || MatchAddress(another.Address);
         }
 
         public ServiceAddressNodeModel ToModel()
@@ -58,6 +69,37 @@ namespace Sparticle.ServiceKeeper.Wcf
             this.Address = model.Address;
             this.ClientIp = model.ClientIp;
             this.PropertyList = model.PropertyList;
+        }
+
+        public bool TryAccess()
+        {
+            int waterMark = userLowWaterMark;
+            var accesscount = AccessCount;
+
+            if ((accesscount + 1) % (waterMark + 1) != 0)
+            {
+                return Interlocked.CompareExchange(ref AccessCount, accesscount + 1, accesscount) == accesscount;
+            }
+
+            return false;
+        }
+
+        public void EnsureNextAccess()
+        {
+            int waterMark = userLowWaterMark;
+
+            do
+            {
+                if ((userLowWaterMark + waterMarkStep) > userHighWaterMark)
+                {
+                    userLowWaterMark = waterMarkStep;
+                    AccessCount = 0;
+                    break;
+                }
+
+                Interlocked.CompareExchange(ref userLowWaterMark, waterMark + waterMarkStep, waterMark);
+                waterMark = userLowWaterMark;
+            } while (false);
         }
     }
 

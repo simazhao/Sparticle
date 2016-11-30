@@ -34,7 +34,7 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         public bool UnRegister(ServiceUnregisteRequest request)
         {
-            return pool.Remove(request.ServiceIdentity, GetClientIp());
+            return pool.Remove(request.ServiceIdentity, GetClientIp(), request.Address);
         }
 
         private string GetClientIp()

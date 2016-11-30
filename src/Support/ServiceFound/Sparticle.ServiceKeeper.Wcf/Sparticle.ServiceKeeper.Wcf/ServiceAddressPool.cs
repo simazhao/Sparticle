@@ -28,17 +28,15 @@ namespace Sparticle.ServiceKeeper.Wcf
             return bucket.Add(address, ip);
         }
 
-        public bool Remove(string serviceIndentity, string ip)
+        public bool Remove(string serviceIndentity, string ip, string address)
         {
             ServiceAddressBucket bucket;
             if (!_buckets.TryGetValue(serviceIndentity, out bucket))
                 return false;
 
-            return bucket.Remove(ip);
+            return bucket.Remove(ip, address);
         }
 
-        private const int waterMarkStep = 5;
-        private int userHighWaterMark = waterMarkStep;
         public ServiceAddressNode GetOne(string serviceIdentity)
         {
             if (string.IsNullOrWhiteSpace(serviceIdentity))
@@ -49,7 +47,6 @@ namespace Sparticle.ServiceKeeper.Wcf
                 return null;
 
             var head = Volatile.Read(ref bucket.Head);
-            int waterMark = userHighWaterMark;
 
             ServiceAddressNode node = null;
             while (true)
@@ -57,34 +54,22 @@ namespace Sparticle.ServiceKeeper.Wcf
                 if (!bucket.Get(head, out node))
                     break;
 
+                if (node.TryAccess())
+                    break;
+
+                node.EnsureNextAccess();
+
                 var count = bucket.AvaliableCount;
 
-                if ((node.AccessCount + 1)% (waterMark + 1) != 0)
+                var nexthead = (head + 1) % count;
+
+                if (IncrementHead(ref bucket.Head, head, nexthead))
                 {
-                    Interlocked.Increment(ref node.AccessCount);
-                    break;
+                    head = bucket.Head;
                 }
                 else
                 {
-                    if (IncreaseWaterMark(ref userHighWaterMark, waterMark, waterMarkStep))
-                    {
-                        waterMark = userHighWaterMark;
-                    }
-                    else
-                    {
-                        waterMark = Volatile.Read(ref userHighWaterMark);
-                    }
-
-                    var nexthead = (head + 1) % count;
-
-                    if (IncrementHead(ref bucket.Head, head, nexthead))
-                    {
-                        head = bucket.Head;
-                    }
-                    else
-                    {
-                        head = Volatile.Read(ref bucket.Head);
-                    }
+                    head = Volatile.Read(ref bucket.Head);
                 }
             }
 
@@ -98,7 +83,7 @@ namespace Sparticle.ServiceKeeper.Wcf
 
         private bool IncrementHead(ref int head, int oldhead, int nexthead)
         {
-            return (Interlocked.CompareExchange(ref head, nexthead, oldhead) == head);
+            return (Interlocked.CompareExchange(ref head, nexthead, oldhead) == oldhead);
         }
 
         public ServiceAddressPoolModel ToModel()

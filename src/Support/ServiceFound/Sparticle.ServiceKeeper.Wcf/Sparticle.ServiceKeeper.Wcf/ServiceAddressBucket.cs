@@ -83,9 +83,9 @@ namespace Sparticle.ServiceKeeper.Wcf
             return removed;
         }
 
-        public bool Remove(string ip)
+        public bool Remove(string ip, string address)
         {
-            var removed = this.avaliableSerivces.TryRemove(node => node.Match(ip));
+            var removed = this.avaliableSerivces.TryRemove(node => node.MatchIp(ip) && node.MatchAddress(address));
 
             return removed != null;
         }
@@ -94,6 +94,7 @@ namespace Sparticle.ServiceKeeper.Wcf
         {
             if (Remove(node))
             {
+                node.AccessCount = 0;
                 return this.unAvaliableSerivces.TryAdd(node);
             }
 
@@ -104,10 +105,16 @@ namespace Sparticle.ServiceKeeper.Wcf
         {
             if (this.unAvaliableSerivces.TryRemove(node))
             {
+                node.AccessCount = 0;
                 return this.avaliableSerivces.TryAdd(node);
             }
 
             return false;
+        }
+
+        public void ClearAccess()
+        {
+            this.avaliableSerivces.ClearCount();
         }
 
         public ServiceAddressBucketModel ToModel()
