@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Cache
 {
-    internal class CouchBasePolicy : CouchbaseDriver3, ICountableCachePolicy
+    internal class CouchBasePolicy : CouchbaseDriver3, ICountableCachePolicy, IStrictCachePolicy
     {
         long ICountableCachePolicy.Decrement(string key, uint delta, TimeSpan expire, uint init)
         {

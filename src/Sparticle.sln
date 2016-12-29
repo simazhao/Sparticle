@@ -95,6 +95,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{3C89F70C-D5D0-4B85-95BC-3A17AA9BEF94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Security.Attack", "Support\Security\Sparticle.Security.Attack\Sparticle.Security.Attack.csproj", "{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparticle.Security.Algorithm", "Support\Security\Sparticle.Security.Algorithm\Sparticle.Security.Algorithm.csproj", "{CF659ECD-969D-4A8F-B99E-53ABF2D4A294}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -221,6 +227,14 @@ Global
 		{A32184AA-E0B8-47FC-96A9-73415DCB344F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32184AA-E0B8-47FC-96A9-73415DCB344F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32184AA-E0B8-47FC-96A9-73415DCB344F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF659ECD-969D-4A8F-B99E-53ABF2D4A294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF659ECD-969D-4A8F-B99E-53ABF2D4A294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF659ECD-969D-4A8F-B99E-53ABF2D4A294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF659ECD-969D-4A8F-B99E-53ABF2D4A294}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -261,5 +275,8 @@ Global
 		{02877F42-1497-4B9F-8A7E-199A7B51DF69} = {6253DA20-1163-4D35-A88C-B905573E23FA}
 		{A32184AA-E0B8-47FC-96A9-73415DCB344F} = {6253DA20-1163-4D35-A88C-B905573E23FA}
 		{87211A6F-3224-401F-81B2-0D063B31E389} = {6253DA20-1163-4D35-A88C-B905573E23FA}
+		{3C89F70C-D5D0-4B85-95BC-3A17AA9BEF94} = {39C6926E-C793-4496-A332-75843DDFFB41}
+		{99BB6EC4-1175-419F-80C3-AE7AEE5B2F21} = {3C89F70C-D5D0-4B85-95BC-3A17AA9BEF94}
+		{CF659ECD-969D-4A8F-B99E-53ABF2D4A294} = {3C89F70C-D5D0-4B85-95BC-3A17AA9BEF94}
 	EndGlobalSection
 EndGlobal

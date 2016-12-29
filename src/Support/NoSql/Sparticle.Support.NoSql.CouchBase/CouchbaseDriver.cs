@@ -179,5 +179,12 @@ namespace Sparticle.Support.NoSql.CouchBase
 
             return result;
         }
+
+        public bool Cas(string key, object value, TimeSpan expire, ulong cas)
+        {
+            var addResult = CasAdd(key, value, expire, cas);
+
+            return addResult.Cas == cas;
+        }
     }
 }
