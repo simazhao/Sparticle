@@ -17,5 +17,7 @@ namespace Sparticle.Common
         string ClientKey { get; set; }
 
         string UserKey { get; set; }
+
+        string SelectANo { get; set; }
     }
 }

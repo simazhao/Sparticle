@@ -39,7 +39,7 @@ namespace Sparticle.Security.Attack
                 return false;
             }
 
-            if (noncePool.Exists(raParam.Nonce))
+            if (noncePool.Exists(raParam.Nonce, raParam.ClientId))
             {
                 error = "replay attack detected";
                 return false;
@@ -49,7 +49,7 @@ namespace Sparticle.Security.Attack
 
             if (tsCheck == TimeStampChecked.InTime)
             {
-                var saved = noncePool.Save(raParam.Nonce);
+                var saved = noncePool.Save(raParam.Nonce, raParam.ClientId);
 
                 if (!saved)
                 {
@@ -91,7 +91,7 @@ namespace Sparticle.Security.Attack
                 return "client timestamp was illegal";
             }
 
-            return "";
+            throw new ArgumentException("not supposed value");
         }
     }
 }

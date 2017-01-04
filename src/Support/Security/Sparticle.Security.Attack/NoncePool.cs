@@ -10,7 +10,7 @@ namespace Sparticle.Security.Attack
     class NoncePool
     {
         private static string NonceKeyPrefix = "Nonce-";
-        private static readonly TimeSpan AllowTimeDiff = new TimeSpan(0, 0, 5);
+        private static readonly TimeSpan AllowTimeDiff = new TimeSpan(0, 0, 10);
         private static readonly TimeSpan NonceLifeTime = new TimeSpan(1, 0, 0);
         private string cachePolicy = "Couch";
 
@@ -33,22 +33,29 @@ namespace Sparticle.Security.Attack
         {
             public string Nonce { get; set; }
 
+            public string ClientId { get; set; }
+
             public long TimeStamp { get; set; }
         }
 
-        public bool Save(string nonce)
+        public bool Save(string nonce, string clientId)
         {
-            if (!Exists(nonce))
+            if (!Exists(nonce, clientId))
             {
-                return nonceStore.Cas(NonceKeyPrefix + nonce, nonce, new TimeSpan(), 0x12345678);
+                return nonceStore.Cas(MakeKey(nonce, clientId), nonce, new TimeSpan(), 0x12345678);
             }
 
             return false;
         }
 
-        public bool Exists(string nonce)
+        public bool Exists(string nonce, string clientId)
         {
-            return nonceStore.Get<string>(NonceKeyPrefix + nonce) != null;
+            return nonceStore.Get<string>(MakeKey(nonce, clientId)) != null;
+        }
+
+        private string MakeKey(string nonce, string clientId)
+        {
+            return string.Format("{0}-{1}-{2}", NonceKeyPrefix, clientId, nonce);
         }
 
         public TimeStampChecked IsValidTimestamp(long timestamp)

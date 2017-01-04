@@ -10,7 +10,7 @@ namespace Sparticle.Security.Algorithm
 {
     public class OneWayEncryptionNameCollection
     {
-        public static List<string> Names { get; } = OnewayEncryptionCollection.EncryptionMap.Keys.ToList<string>();
+        public static List<string> Names => OnewayEncryptionCollection.EncryptionMap.Keys.ToList<string>();
     }
 
     class OnewayEncryptionCollection
@@ -32,7 +32,7 @@ namespace Sparticle.Security.Algorithm
 
     public class DualWayEncryptionNameCollection
     {
-        public static List<string> Names { get; } = DualwayEncryptionCollection.EncryptionMap.Keys.ToList<string>();
+        public static List<string> Names => DualwayEncryptionCollection.EncryptionMap.Keys.ToList<string>();
     }
 
     class DualwayEncryptionCollection
@@ -45,6 +45,7 @@ namespace Sparticle.Security.Algorithm
                 {nameof(TripleDes), new TripleDes() },
                 {nameof(RIjndael), new RIjndael() },
 
+                {nameof(Rsa), new Rsa() },
             };
     }
 }

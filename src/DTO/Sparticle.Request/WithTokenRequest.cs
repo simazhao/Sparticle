@@ -18,5 +18,7 @@ namespace Sparticle.Request
         public string ClientKey { get; set; }
 
         public string UserKey { get; set; }
+
+        public string SelectANo { get; set; }
     }
 }
