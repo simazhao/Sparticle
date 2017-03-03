@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace FundTrade.API.Service.Common
+namespace Sparticle.Config.Types
 {
     /// <summary>
     /// RequestHandlerOrder Config Section

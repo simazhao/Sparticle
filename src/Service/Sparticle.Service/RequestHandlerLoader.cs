@@ -1,5 +1,4 @@
-﻿using FundTrade.API.Service.Common;
-using Sparticle.Config.LocalSetting;
+﻿using Sparticle.Config.LocalSetting;
 using Sparticle.Service.Handler;
 using System;
 using System.Collections.Generic;
