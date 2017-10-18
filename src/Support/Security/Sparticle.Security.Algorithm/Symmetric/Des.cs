@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.Symmetric
 {
-    class Des : SymmetricEncrypt
+    public class Des : SymmetricEncrypt
     {
         public Des()
         {

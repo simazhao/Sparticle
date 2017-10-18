@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.OneWayEncryption
 {
-    class Sha512 : IOneWayEncryption
+    public class Sha512 : IOneWayEncryption
     {
         public string Encrypt(Encoding encode, string text, string key = null)
         {

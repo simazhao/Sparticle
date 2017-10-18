@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.OneWayEncryption
 {
-    class Md5 : IOneWayEncryption
+    public class Md5 : IOneWayEncryption
     {
         public string Encrypt(Encoding encode, string text, string key)
         {

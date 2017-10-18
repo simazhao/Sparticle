@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.Symmetric
 {
-    class Aes : SymmetricEncrypt
+    public class Aes : SymmetricEncrypt
     {
         public Aes()
         {

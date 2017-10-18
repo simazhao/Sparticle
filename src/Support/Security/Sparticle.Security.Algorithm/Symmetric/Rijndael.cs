@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.Symmetric
 {
-    class RIjndael : SymmetricEncrypt
+    public class RIjndael : SymmetricEncrypt
     {
         public RIjndael() // avoid name conflict
         {

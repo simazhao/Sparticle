@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.Symmetric
 {
-    abstract class SymmetricEncrypt : IDualWayEncryption
+    public abstract class SymmetricEncrypt : IDualWayEncryption
     {
         public string Algo { get; protected set; }
 

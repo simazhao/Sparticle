@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sparticle.Security.Algorithm.Symmetric
 {
-    class Rsa : IDualWayEncryption
+    public class Rsa : IDualWayEncryption
     {
         public string Encryption(Encoding encode, string text, string key)
         {
